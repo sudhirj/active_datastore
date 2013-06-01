@@ -15,3 +15,9 @@ spec/reports
 test/tmp
 test/version_tmp
 tmp
+
+*.p12
+
+spec/credentials.yml
+
+.DS_Store
