@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = ActiveDatastore::VERSION
   spec.authors       = ["Sudhir Jonathan"]
   spec.email         = ["sudhir.j@gmail.com"]
-  spec.description   = "Active Wrapper for GCD"
-  spec.summary       = "Wrapper for Google Cloud datastore"
-  spec.homepage      = ""
+  spec.description   = "ODM (Object-Document-Mapper) for the Google Cloud Datastore."
+  spec.summary       = "ODM (Object-Document-Mapper) for the Google Cloud Datastore."
+  spec.homepage      = "https://github.com/sudhirj/active_datastore"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
