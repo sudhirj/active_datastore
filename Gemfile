@@ -6,6 +6,7 @@ gem 'json'
 gem 'oj'
 gem 'active_support'
 gem 'i18n'
+
 gemspec
 
 gem 'rspec'
