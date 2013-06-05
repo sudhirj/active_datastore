@@ -7,7 +7,7 @@ ActiveDatastore is (eventually) meant to be comparable to [ActiveRecord](https:/
 ## Current Status
 I've built a wrapper over the GCD API (`ActiveDatastore::Dataset`) that's fully functional and can be used for pretty much all the examples given in the documentation. The wrapper's API is very similar to what you see in the NodeJS examples. 
 
-Right now, ActiveDatastore is very much a work in progress. Please evaluate it before production use, and do remember that the API will undergo breaking changes until we hit v1.0.
+Right now, ActiveDatastore is very much a work in progress. Please evaluate it before production use, and do remember that the API may undergo breaking changes until we hit v1.0.
 
 ## Installation
 
@@ -38,9 +38,9 @@ In your initializer (if you're on Rails you could create `config/initializers/da
 	client = ActiveDatastore::Client.new AUTH_EMAIL, AUTH_KEY
 	$dataset = ActiveDatastore::Dataset.new DATASET_ID, client
 
-The initialization of the client seems be performance / network intensive, so it might make sense to do it once and hold the `$dataset` for the lifetime of the application. `ActiveDatastore::Dataset` is stateless and should support this.
+The initialization of the client is performance / network intensive, so it might make sense to do it once and hold the `$dataset` for the lifetime of the application. `ActiveDatastore::Dataset` is stateless and will support this.
 
-To make calls to the datastore, use the methods documented on the [JSON API Reference](https://developers.google.com/datastore/docs/apis/v1beta1/datasets) (but remember use the underscore equivalent names.)
+To make calls to the datastore, use the methods documented on the [JSON API Reference](https://developers.google.com/datastore/docs/apis/v1beta1/datasets), but remember to use the underscore equivalent names. For example, use `begin_transaction` instead of `beginTransaction`.
 
 	start_response = $dataset.begin_transaction({
 	  isolationLevel: "snapshot"
@@ -55,14 +55,16 @@ To make calls to the datastore, use the methods documented on the [JSON API Refe
 	
 	rollback_response.data.kind    # Should be "datastore#rollbackResponse"  
 
-Remeber that both the request body and the `response.data` are hashes with camel case keys, as shown in the [docs](https://developers.google.com/datastore/docs/apis/v1beta1/datasets/lookup#response). I know it's a little inconsistent that way, but an effort to deeply walk through each hash and convert keys will probably be more trouble than it's worth.
+Both the request body and the `response.data` are hashes with camel case keys, as shown in the [docs](https://developers.google.com/datastore/docs/apis/v1beta1/datasets/lookup#response). Using camelCase for the request and response while underscore_case for the method names is a little inconsistent, but any effort to deeply walk through each hash and convert keys will probably be more trouble than it's worth.
 
 
 ## Contributing
 
 1. Fork the repo
-2. Create your feature branch (`git checkout -b my-new-feature`)
+2. Create your feature branch (`git checkout -b bug-fix`)
 3. **WRITE GOOD AND CLEAR TESTS**. Do remember that this gem may be used in production to serve millions of requests. Bugs can be catastrophic. Also, I can't merge and maintain code I don't fully understand.
-4. Commit your changes (`git commit -am 'Add some feature'`)
-5. Push to the branch (`git push origin my-new-feature`)
+4. Commit your changes (`git commit -am 'Fixed bug!'`)
+5. Push to the branch (`git push origin bug-fix`)
 6. Create new Pull Request
+
+Please do the same for features you'd like to add, but send the pull request fast and early so we can talk about it and not do things twice. [Pull requests are conversations.](https://github.com/blog/1124-how-we-use-pull-requests-to-build-github)
