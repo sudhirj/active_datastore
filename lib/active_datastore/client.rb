@@ -3,7 +3,7 @@ require 'google/api_client'
 module ActiveDatastore
   class Client
     def initialize email, secret
-      @client = Google::APIClient.new
+      @client = Google::APIClient.new(application_name: 'ActiveDatastore', application_version: ActiveDatastore::VERSION)
       key = Google::APIClient::KeyUtils.load_from_pkcs12(secret, 'notasecret')
       service_account = Google::APIClient::JWTAsserter.new(
         email,
