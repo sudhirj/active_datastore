@@ -1,6 +1,6 @@
 module ActiveDatastore
 	class Dataset
-		METHODS = [:allocate_ids, :begin_transaction, :blind_write, :commit, :lookup, :rollback, :run_query]
+		METHODS = [:allocate_ids, :begin_transaction, :commit, :lookup, :rollback, :run_query]
 		def initialize dataset_id, client
 			@client = client
 			@dataset_id = dataset_id

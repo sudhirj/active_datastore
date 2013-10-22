@@ -18,7 +18,7 @@ module ActiveDatastore
     end
 
     def api
-    	@api ||= @client.discovered_api('datastore', 'v1beta1').datasets
+    	@api ||= @client.discovered_api('datastore', 'v1beta2').datasets
     end
 
     def execute opts
