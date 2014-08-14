@@ -4,7 +4,15 @@ module ActiveDatastore
   class Client
     def initialize email, secret
       @client = Google::APIClient.new(application_name: 'ActiveDatastore', application_version: ActiveDatastore::VERSION)
-      key = Google::APIClient::KeyUtils.load_from_pkcs12(secret, 'notasecret')
+      begin
+        key = Google::APIClient::KeyUtils.load_from_pkcs12(secret, 'notasecret')
+      rescue => ex
+        if ex.message.include?("Invalid keyfile")
+          # then try pem
+          key = Google::APIClient::KeyUtils.load_from_pem(secret, 'notasecret')
+        end
+      end
+
       service_account = Google::APIClient::JWTAsserter.new(
         email,
         ['https://www.googleapis.com/auth/datastore', 'https://www.googleapis.com/auth/userinfo.email'],
