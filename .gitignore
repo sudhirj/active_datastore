@@ -21,3 +21,4 @@ tmp
 spec/credentials.yml
 
 .DS_Store
+.idea/
